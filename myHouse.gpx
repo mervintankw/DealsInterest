@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx
+xmlns="http://www.topografix.com/GPX/1/1"
+xmlns:gpxx = "http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd
+http://www.garmin.com/xmlschemas/GpxExtensions/v3
+http://www8.garmin.com/xmlschemas/GpxExtensions/v3/GpxExtensionsv3.xsd"
+version="1.1"
+creator="gpx-poi.com">
+
+   <wpt lat="1.373684" lon="103.882697">
+      <time>2014-01-02T15:40:11Z</time>
+      <name>Hougang Ave 8</name>
+      <extensions>
+         <gpxx:WaypointExtension>
+            <gpxx:Address>
+               <gpxx:StreetAddress>660 Hougang Ave 8 #10-489</gpxx:StreetAddress>
+               <gpxx:City>Singapore</gpxx:City>
+               <gpxx:State>Singapore</gpxx:State>
+               <gpxx:Country>SG</gpxx:Country>
+               <gpxx:PostalCode>530660</gpxx:PostalCode>
+            </gpxx:Address>
+         </gpxx:WaypointExtension>
+      </extensions>
+   </wpt>
+
+</gpx>
