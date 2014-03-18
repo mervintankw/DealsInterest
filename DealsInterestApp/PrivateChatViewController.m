@@ -460,15 +460,51 @@ int requestType1 = 0;
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     if ([[_messageFromId objectAtIndex:[indexPath row]] isEqualToString:[prefs stringForKey:@"pk"]])
-        cell.contentView.backgroundColor=[UIColor whiteColor] ;
+        cell.contentView.backgroundColor=[self colorWithHexString:@"70C8FF"] ;
     else
-        cell.contentView.backgroundColor=[UIColor colorWithRed:(153/255.0) green:(255/255.0) blue:(255/255.0) alpha:1] ;
+        cell.contentView.backgroundColor=[self colorWithHexString:@"BCE5FF"] ;
     
     usernameLabel.text = [_messageFromName objectAtIndex:[indexPath row]];
     messageLabel.text = [_messageContent objectAtIndex:[indexPath row]];
 //    timeLabel.text = [_messageTime objectAtIndex:[indexPath row]];
     
     return cell;
+}
+
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    NSString *cString = [[hex stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] uppercaseString];
+    
+    // String should be 6 or 8 characters
+    if ([cString length] < 6) return [UIColor grayColor];
+    
+    // strip 0X if it appears
+    if ([cString hasPrefix:@"0X"]) cString = [cString substringFromIndex:2];
+    
+    if ([cString length] != 6) return  [UIColor grayColor];
+    
+    // Separate into r, g, b substrings
+    NSRange range;
+    range.location = 0;
+    range.length = 2;
+    NSString *rString = [cString substringWithRange:range];
+    
+    range.location = 2;
+    NSString *gString = [cString substringWithRange:range];
+    
+    range.location = 4;
+    NSString *bString = [cString substringWithRange:range];
+    
+    // Scan values
+    unsigned int r, g, b;
+    [[NSScanner scannerWithString:rString] scanHexInt:&r];
+    [[NSScanner scannerWithString:gString] scanHexInt:&g];
+    [[NSScanner scannerWithString:bString] scanHexInt:&b];
+    
+    return [UIColor colorWithRed:((float) r / 255.0f)
+                           green:((float) g / 255.0f)
+                            blue:((float) b / 255.0f)
+                           alpha:1.0f];
 }
 
 - (void)offerClick:(id)sender {

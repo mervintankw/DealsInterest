@@ -14,6 +14,7 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "ViewItemViewController.h"
 #import "MyProductsViewController.h"
+#import "MyBookmarksViewController.h"
 
 @interface MeViewController ()
 
@@ -59,7 +60,9 @@ int requestType;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-//    [self LoadView];
+    [self LoadView];
+//    [self.navigationController popViewControllerAnimated:FALSE];
+//    [self.navigationController popToRootViewControllerAnimated:FALSE];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -67,7 +70,7 @@ int requestType;
 //    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
 //    NSLog(@"purpose: %@",appDelegate.loadProfilePurpose);
 //    NSLog(@"viewWillAppear");
-    [self LoadView];
+//    [self LoadView];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -78,11 +81,23 @@ int requestType;
     if([appDelegate.loadProfilePurpose isEqualToString:@"Edit Profile"]){
         appDelegate.loadProfilePurpose = @"";
         UpdateProfileViewController *updateProfileViewController = [[UpdateProfileViewController alloc] init];
+//        [self.navigationController popViewControllerAnimated:FALSE];
+//        [self.navigationController popToRootViewControllerAnimated:FALSE];
         [self.navigationController pushViewController:updateProfileViewController animated:YES];
     }else if([appDelegate.loadProfilePurpose isEqualToString:@"My Products"]){
         appDelegate.loadProfilePurpose = @"";
         MyProductsViewController *myProductsViewController = [[MyProductsViewController alloc] init];
+//        [self.navigationController popViewControllerAnimated:FALSE];
+//        [self.navigationController popToRootViewControllerAnimated:FALSE];
         [self.navigationController pushViewController:myProductsViewController animated:YES];
+    }else if([appDelegate.loadProfilePurpose isEqualToString:@"My Bookmarks"]){
+        appDelegate.loadProfilePurpose = @"";
+        MyBookmarksViewController *myBookmarksViewController = [[MyBookmarksViewController alloc] init];
+        //        [self.navigationController popViewControllerAnimated:FALSE];
+        //        [self.navigationController popToRootViewControllerAnimated:FALSE];
+        [self.navigationController pushViewController:myBookmarksViewController animated:YES];
+    }else{
+        [self getJsonObject];
     }
 }
 
@@ -95,7 +110,7 @@ int requestType;
     
     [_loadProfileIndicator startAnimating];
     
-    CGRect frame = CGRectMake(0, 0, 310, 44);
+    CGRect frame = CGRectMake(0, 0, 200, 44);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont systemFontOfSize:25];
@@ -103,6 +118,8 @@ int requestType;
     label.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = label;
     label.text = @"Profile";
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(triggerSearch)];
     
     // border radius
     [_userInfoView.layer setCornerRadius:8.0f];
@@ -142,6 +159,13 @@ int requestType;
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(onOpenButtonClick)];
     
     [self getJsonObject];
+}
+
+-(void)triggerSearch
+{
+    SearchViewController *svc = [[SearchViewController alloc] init];
+    // Push view controller into view
+    [self.navigationController pushViewController:svc animated:YES];
 }
 
 int tapCount;

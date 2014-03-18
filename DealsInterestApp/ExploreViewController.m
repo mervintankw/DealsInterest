@@ -68,15 +68,17 @@ HomeViewController *expDetailViewController;
     
     
     
-    CGRect frame = CGRectMake(0, 0, 310, 44);
-    UILabel *label = [[UILabel alloc] initWithFrame:frame];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:25];
-    label.textAlignment = NSTextAlignmentCenter;;
-    label.textColor = [UIColor whiteColor];
-    self.navigationItem.titleView = label;
-    label.text = @"Category";
+//    CGRect frame = CGRectMake(0, 0, 180, 44);
+//    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+//    label.backgroundColor = [UIColor clearColor];
+//    label.font = [UIFont systemFontOfSize:25];
+//    label.textAlignment = NSTextAlignmentCenter;;
+//    label.textColor = [UIColor whiteColor];
+//    self.navigationItem.titleView = label;
+//    label.text = @"Category";
    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(triggerSearch)];
+    
     /*
      Configuration for loading indicator
      */
@@ -123,7 +125,7 @@ HomeViewController *expDetailViewController;
 }
 
 -(void) viewWillAppear:(BOOL)animated{
-    CGRect frame = CGRectMake(0, 0, 310, 44);
+    CGRect frame = CGRectMake(0, 0, 180, 44);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont systemFontOfSize:25];
@@ -179,6 +181,13 @@ HomeViewController *expDetailViewController;
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     [self.collectionView setCollectionViewLayout:flowLayout];
+}
+
+-(void)triggerSearch
+{
+    SearchViewController *svc = [[SearchViewController alloc] init];
+    // Push view controller into view
+    [self.navigationController pushViewController:svc animated:YES];
 }
 
 //-(UIImage*)createSolidColorImageWithColor:(UIColor*)color andSize:(CGSize)size{

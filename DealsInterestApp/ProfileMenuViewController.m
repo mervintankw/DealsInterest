@@ -39,11 +39,8 @@ NSIndexPath *tableSelection;
     return self;
 }
 
-- (void)viewDidLoad
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
     UINib *cellNib;
     
     NSMutableArray *keys = [[NSMutableArray alloc] init];
@@ -74,73 +71,15 @@ NSIndexPath *tableSelection;
     
     [self.accountTableView reloadData];
     
-    
-    
-//    populateTablePurpose = 1;
-//
-//    cellNib = [UINib nibWithNibName:@"NibProfileMenuAccountCell" bundle:nil];
-//    [self.otherTableView registerNib:cellNib forCellReuseIdentifier:@"com.accountitem.cell"];
-//    
-//    self.otherTableView.delegate = self;
-//    self.otherTableView.dataSource = self;
-//    
-//    [self.otherTableView reloadData];
-
-    
-    // Set padding left to button texts
-//    [_myProfileBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-//    [_editLayoutBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-//    [_myProductsBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-//    [_myOffersBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-//    [_myBookmarksBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-//    [_transactionHistoryBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-//    [_inviteFriendsBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-//    [_notificationsBtn setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0)];
-    
-    // Set border to buttons
-//    float borderThickness = 1.0f;
-//    [[_myProfileBtn layer] setBorderWidth:borderThickness];
-//    [[_myProfileBtn layer] setBorderColor:[UIColor blackColor].CGColor];
-//    [[_editLayoutBtn layer] setBorderWidth:borderThickness];
-//    [[_editLayoutBtn layer] setBorderColor:[UIColor blackColor].CGColor];
-//    [[_myProductsBtn layer] setBorderWidth:borderThickness];
-//    [[_myProductsBtn layer] setBorderColor:[UIColor blackColor].CGColor];
-//    [[_myOffersBtn layer] setBorderWidth:borderThickness];
-//    [[_myOffersBtn layer] setBorderColor:[UIColor blackColor].CGColor];
-//    [[_myBookmarksBtn layer] setBorderWidth:borderThickness];
-//    [[_myBookmarksBtn layer] setBorderColor:[UIColor blackColor].CGColor];
-//    [[_transactionHistoryBtn layer] setBorderWidth:borderThickness];
-//    [[_transactionHistoryBtn layer] setBorderColor:[UIColor blackColor].CGColor];
-//    [[_inviteFriendsBtn layer] setBorderWidth:borderThickness];
-//    [[_inviteFriendsBtn layer] setBorderColor:[UIColor blackColor].CGColor];
-//    [[_notificationsBtn layer] setBorderWidth:borderThickness];
-//    [[_notificationsBtn layer] setBorderColor:[UIColor blackColor].CGColor];
-//    [[_logOutBtn layer] setBorderWidth:borderThickness];
-//    [[_logOutBtn layer] setBorderColor:[UIColor blackColor].CGColor];
-    
-    // Set border radius to buttons
-//    _myProfileBtn.layer.cornerRadius = 5;
-//    _myProfileBtn.clipsToBounds = YES;
-//    _editLayoutBtn.layer.cornerRadius = 5;
-//    _editLayoutBtn.clipsToBounds = YES;
-//    _myProductsBtn.layer.cornerRadius = 5;
-//    _myProductsBtn.clipsToBounds = YES;
-//    _myOffersBtn.layer.cornerRadius = 5;
-//    _myOffersBtn.clipsToBounds = YES;
-//    _myBookmarksBtn.layer.cornerRadius = 5;
-//    _myBookmarksBtn.clipsToBounds = YES;
-//    _transactionHistoryBtn.layer.cornerRadius = 5;
-//    _transactionHistoryBtn.clipsToBounds = YES;
-//    _inviteFriendsBtn.layer.cornerRadius = 5;
-//    _inviteFriendsBtn.clipsToBounds = YES;
-//    _notificationsBtn.layer.cornerRadius = 5;
-//    _notificationsBtn.clipsToBounds = YES;
-//    _logOutBtn.layer.cornerRadius = 5;
-//    _logOutBtn.clipsToBounds = YES;
-    
     // Setup button event listener
     [_myProfileBtn addTarget:self action:@selector(MyProfileBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     [_logOutBtn addTarget:self action:@selector(LogoutBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
 }
 
 -(void)MyProfileBtnClick:(id)sender
@@ -180,16 +119,17 @@ NSIndexPath *tableSelection;
 
     if([contentForThisRow isEqualToString:@"Edit Profile"]){
         NSLog(@"in edit profile button click");
+        [appDelegate.self.tabBarController setSelectedIndex:1];
         [appDelegate.self.tabBarController setSelectedIndex:4];
-
-//        UpdateProfileViewController *updateProfileViewController = [[UpdateProfileViewController alloc] init];
         appDelegate.loadProfilePurpose = contentForThisRow;
-//        [appDelegate.self.revealController showViewController:updateProfileViewController];
-//        [appDelegate.self.revealController.frontViewController.navigationController pushViewController:updateProfileViewController animated:TRUE];
         [appDelegate.self.revealController showViewController:appDelegate.self.revealController.frontViewController];
-//        [self.revealController.navigationController pushViewController:updateProfileViewController animated:TRUE];
-//        [appDelegate.self.revealController presentModalViewController:updateProfileViewController animated:TRUE];
     }else if([contentForThisRow isEqualToString:@"My Products"]){
+        [appDelegate.self.tabBarController setSelectedIndex:1];
+        [appDelegate.self.tabBarController setSelectedIndex:4];
+        appDelegate.loadProfilePurpose = contentForThisRow;
+        [appDelegate.self.revealController showViewController:appDelegate.self.revealController.frontViewController];
+    }else if([contentForThisRow isEqualToString:@"My Bookmarks"]){
+        [appDelegate.self.tabBarController setSelectedIndex:1];
         [appDelegate.self.tabBarController setSelectedIndex:4];
         appDelegate.loadProfilePurpose = contentForThisRow;
         [appDelegate.self.revealController showViewController:appDelegate.self.revealController.frontViewController];
@@ -199,6 +139,8 @@ NSIndexPath *tableSelection;
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
         // Push user back to login page
         [[[UIApplication sharedApplication] delegate] performSelector:@selector(userDidLogout)];
+    }else{
+        appDelegate.loadProfilePurpose = @"";
     }
 }
 

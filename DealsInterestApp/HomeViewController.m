@@ -136,6 +136,8 @@ UIRefreshControl *refreshControl;
 //    frame1.size.height += 10;
 //    self.collectionView.frame = frame1;
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(triggerSearch)];
+    
     self.collectionView.clipsToBounds = YES;
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     
@@ -160,7 +162,11 @@ UIRefreshControl *refreshControl;
     label.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = label;
 //    label.text = @"Home";
-    label.text = _categoryType;
+    if([_categoryType isEqualToString:@"All"]){
+        label.text = @"DealsInterest";
+    }else{
+        label.text = _categoryType;
+    }
     
     self.collectionView.alwaysBounceVertical = YES;
     
@@ -257,6 +263,13 @@ UIRefreshControl *refreshControl;
 //    NSLog(@"%d",firstSection.count);
 //    [self.view addSubview:self.collectionView];
     
+}
+
+-(void)triggerSearch
+{
+    SearchViewController *svc = [[SearchViewController alloc] init];
+    // Push view controller into view
+    [self.navigationController pushViewController:svc animated:YES];
 }
 
 -(void)viewWillAppear:(BOOL)animated

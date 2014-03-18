@@ -7,6 +7,7 @@
 //
 
 #import "ActivityViewController.h"
+#import "SearchViewController.h"
 
 @interface ActivityViewController ()
 
@@ -39,7 +40,7 @@ NSString *activityToggle;
 
 -(void)LoadView
 {
-    CGRect frame = CGRectMake(0, 0, 310, 44);
+    CGRect frame = CGRectMake(0, 0, 200, 44);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont systemFontOfSize:25];
@@ -47,6 +48,15 @@ NSString *activityToggle;
     label.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = label;
     label.text = @"Activity";
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(triggerSearch)];
+}
+
+-(void)triggerSearch
+{
+    SearchViewController *svc = [[SearchViewController alloc] init];
+    // Push view controller into view
+    [self.navigationController pushViewController:svc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

@@ -1,18 +1,18 @@
 //
-//  MyProductsViewController.m
+//  MyBookmarksViewController.m
 //  DealsInterestApp
 //
-//  Created by Mervin Tan Kok Wei on 13/1/14.
+//  Created by Mervin Tan Kok Wei on 7/3/14.
 //  Copyright (c) 2014 com.dealsinterest. All rights reserved.
 //
 
-#import "MyProductsViewController.h"
+#import "MyBookmarksViewController.h"
 #import "SBJson.h"
 #import "AppDelegate.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "ViewItemViewController.h"
 
-@interface MyProductsViewController ()
+@interface MyBookmarksViewController ()
 
 @property (nonatomic, strong) NSArray *pkArray;
 @property (nonatomic, strong) NSArray *dataArray;
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation MyProductsViewController
+@implementation MyBookmarksViewController
 
 // 0 - retrieve user particulars
 // 1 - retrieve user posts
@@ -33,7 +33,7 @@
 int requestType;
 NSString *postCount;
 NSMutableArray *favouritePkArray;
-int testInt = 0;
+int testInt1 = 0;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,13 +44,6 @@ int testInt = 0;
     return self;
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-//    [self LoadView];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [self LoadView];
@@ -58,19 +51,19 @@ int testInt = 0;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [self getPostCount];
+    [self getBookmarkedPosts];
 }
 
 - (void)LoadView
 {
-    CGRect frame = CGRectMake(0, 0, 180, 44);
+    CGRect frame = CGRectMake(0, 0, 160, 44);
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont systemFontOfSize:25];
     label.textAlignment = NSTextAlignmentCenter;;
     label.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = label;
-    label.text = @"My Products";
+    label.text = @"My Bookmarks";
 }
 
 NSIndexPath *tableSelection;
@@ -82,7 +75,7 @@ NSString *likesNo;
     NSMutableArray *likeData = [self.likeArray objectAtIndex:indexPath.section];
     NSString *cellData = [data objectAtIndex:indexPath.row];
     NSString *likeCellData = [likeData objectAtIndex:indexPath.row];
-//    NSLog(@"Selected index: %@",cellData);
+    //    NSLog(@"Selected index: %@",cellData);
     selectedTitle = cellData;
     likesNo = likeCellData;
     [self performSelector:@selector(singleTap) withObject: nil afterDelay: .4];
@@ -99,7 +92,7 @@ NSString *likesNo;
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    [self.productCollectionView.collectionViewLayout invalidateLayout];
+    [self.contentCollectionView.collectionViewLayout invalidateLayout];
     return [self.dataArray count];
 }
 
@@ -124,7 +117,7 @@ NSString *likesNo;
     NSString *cellCommentData = [commentData objectAtIndex:indexPath.row];
     NSString *cellPkData = [pkData objectAtIndex:indexPath.row];
     
-    static NSString *cellIdentifier = @"com.myproductview.cell";
+    static NSString *cellIdentifier = @"com.mybookmarkview.cell";
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     
@@ -140,7 +133,7 @@ NSString *likesNo;
     
     [likeBtn setTitle:cellPkData forState:UIControlStateNormal];
     [likeBtn setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];
-//    [likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchDown];
+    //    [likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchDown];
     // Populate product title label
     titleLabel.text = cellData;
     // Populate product price label
@@ -200,7 +193,7 @@ NSString *likesNo;
         //        productImageView.image = [UIImage imageWithData:imageData];
     }
     
-//    [_loadProfileIndicator stopAnimating];
+    //    [_loadProfileIndicator stopAnimating];
     
     return cell;
 }
@@ -228,7 +221,7 @@ NSString *likesNo;
     //initialize convert the received data to string with UTF8 encoding
     NSString *htmlSTR = [[NSString alloc] initWithData:self.receivedData
                                               encoding:NSUTF8StringEncoding];
-    //    NSLog(@"%@" , htmlSTR);
+    NSLog(@"%@" , htmlSTR);
     
     SBJsonParser *parser = [[SBJsonParser alloc] init];
     NSMutableDictionary *jsonDictionary = [parser objectWithString:htmlSTR];
@@ -292,14 +285,14 @@ NSString *likesNo;
             NSLog(@"first section size: %d",[firstSection count]);
             
             if (firstSection[0] != [NSNull null]) {
-                testInt++;
-                UINib *cellNib = [UINib nibWithNibName:@"NibMyProductCell" bundle:nil];
-                [self.productCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"com.myproductview.cell"];
+                testInt1++;
+                UINib *cellNib = [UINib nibWithNibName:@"NibMyBookmarkCell" bundle:nil];
+                [_contentCollectionView registerNib:cellNib forCellWithReuseIdentifier:@"com.mybookmarkview.cell"];
                 
-                [self.productCollectionView.collectionViewLayout invalidateLayout];
+                [_contentCollectionView.collectionViewLayout invalidateLayout];
                 
-                self.productCollectionView.delegate = self;
-                self.productCollectionView.dataSource = self;
+                _contentCollectionView.delegate = self;
+                _contentCollectionView.dataSource = self;
                 
                 UICollectionViewFlowLayout *flowLayout1 = [[UICollectionViewFlowLayout alloc] init];
                 [flowLayout1 setItemSize:CGSizeMake(155, 175)];
@@ -307,13 +300,13 @@ NSString *likesNo;
                 [flowLayout1 setMinimumLineSpacing:3.0];
                 [flowLayout1 setScrollDirection:UICollectionViewScrollDirectionVertical];
                 //    [self.collectionView setContentOffset:CGPointZero animated:YES];
-                [self.productCollectionView setCollectionViewLayout:flowLayout1];
+                [self.contentCollectionView setCollectionViewLayout:flowLayout1];
                 
-//                [NSThread sleepForTimeInterval:1];
+                //                [NSThread sleepForTimeInterval:1];
                 
                 //reload collection view data
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.productCollectionView reloadData];
+                    [self.contentCollectionView reloadData];
                 });
             }
         }
@@ -323,15 +316,15 @@ NSString *likesNo;
 -(void) viewWillDisappear:(BOOL)animated {
     if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
         // Navigation button was pressed. Do some stuff
-        self.productCollectionView.dataSource = nil;
-        self.productCollectionView.delegate = nil;
-        [self.productCollectionView reloadData];
+        _contentCollectionView.dataSource = nil;
+        _contentCollectionView.delegate = nil;
+        [_contentCollectionView reloadData];
         [self.navigationController popViewControllerAnimated:NO];
     }
     [super viewWillDisappear:animated];
 }
 
-- (void)getPostCount{
+- (void)getBookmarkedPosts{
     requestType = 1;
     
     // Post request
@@ -342,25 +335,25 @@ NSString *likesNo;
     NSMutableData *data = [[NSMutableData alloc] init];
     self.receivedData = data;
     
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
     //initialize url that is going to be fetched.
     AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@json/item.getPostItem/",appDelegate.apiUrl]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@json/favourite.getItem/%@",appDelegate.apiUrl,[prefs stringForKey:@"pk"]]];
     
     //initialize a request from url
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[url standardizedURL]];
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    
-    //set http method
-    [request setHTTPMethod:@"POST"];
-    //initialize a post data
-    NSString *postData = [NSString stringWithFormat:@"user_id=%@", [prefs stringForKey:@"pk"]];
-    //set request content type we MUST set this value.
+    //    //set http method
+    [request setHTTPMethod:@"GET"];
+    //    //initialize a post data
+    //    NSString *postData = [NSString stringWithFormat:@"user_id=%@", [prefs stringForKey:@"pk"]];
+    //    //set request content type we MUST set this value.
     
     [request setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     
     //set post data of request
-    [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
+    //    [request setHTTPBody:[postData dataUsingEncoding:NSUTF8StringEncoding]];
     
     //initialize a connection from request
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];

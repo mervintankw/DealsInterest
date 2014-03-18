@@ -18,6 +18,9 @@
 		081F5A8818973FFE0040C9B8 /* PrivateChatSellerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081F5A8618973FFE0040C9B8 /* PrivateChatSellerViewController.m */; };
 		081F5A8918973FFE0040C9B8 /* PrivateChatSellerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081F5A8718973FFE0040C9B8 /* PrivateChatSellerViewController.xib */; };
 		081F5A8B189905C70040C9B8 /* NibSellerChatListItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081F5A8A189905C70040C9B8 /* NibSellerChatListItem.xib */; };
+		0828081918C9E0500082484C /* MyBookmarksViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828081718C9E0500082484C /* MyBookmarksViewController.xib */; };
+		0828081B18C9E4230082484C /* MyBookmarksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0828081618C9E0500082484C /* MyBookmarksViewController.m */; };
+		0828081D18C9E9A80082484C /* NibMyBookmarkCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0828081C18C9E9A80082484C /* NibMyBookmarkCell.xib */; };
 		082972B0181545DA00BFDF9D /* heart_tag_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 082972AF181545DA00BFDF9D /* heart_tag_red.png */; };
 		082D2FCA1879803D009BFAE8 /* ProfileMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082D2FC81879803D009BFAE8 /* ProfileMenuViewController.m */; };
 		082D2FCB1879803D009BFAE8 /* ProfileMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 082D2FC91879803D009BFAE8 /* ProfileMenuViewController.xib */; };
@@ -224,6 +227,10 @@
 		081F5A8618973FFE0040C9B8 /* PrivateChatSellerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateChatSellerViewController.m; sourceTree = "<group>"; };
 		081F5A8718973FFE0040C9B8 /* PrivateChatSellerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrivateChatSellerViewController.xib; sourceTree = "<group>"; };
 		081F5A8A189905C70040C9B8 /* NibSellerChatListItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibSellerChatListItem.xib; sourceTree = "<group>"; };
+		0828081518C9E0500082484C /* MyBookmarksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBookmarksViewController.h; sourceTree = "<group>"; };
+		0828081618C9E0500082484C /* MyBookmarksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBookmarksViewController.m; sourceTree = "<group>"; };
+		0828081718C9E0500082484C /* MyBookmarksViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyBookmarksViewController.xib; sourceTree = "<group>"; };
+		0828081C18C9E9A80082484C /* NibMyBookmarkCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibMyBookmarkCell.xib; sourceTree = "<group>"; };
 		082972AF181545DA00BFDF9D /* heart_tag_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heart_tag_red.png; sourceTree = "<group>"; };
 		082D2FC71879803D009BFAE8 /* ProfileMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileMenuViewController.h; sourceTree = "<group>"; };
 		082D2FC81879803D009BFAE8 /* ProfileMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileMenuViewController.m; sourceTree = "<group>"; };
@@ -820,6 +827,10 @@
 				08C2269C18C333D500060507 /* ActivityViewController.h */,
 				08C2269D18C333D600060507 /* ActivityViewController.m */,
 				08C2269E18C333D600060507 /* ActivityViewController.xib */,
+				0828081518C9E0500082484C /* MyBookmarksViewController.h */,
+				0828081618C9E0500082484C /* MyBookmarksViewController.m */,
+				0828081718C9E0500082484C /* MyBookmarksViewController.xib */,
+				0828081C18C9E9A80082484C /* NibMyBookmarkCell.xib */,
 			);
 			path = DealsInterestApp;
 			sourceTree = "<group>";
@@ -1003,6 +1014,7 @@
 				08826AB91826753100A7FE0A /* Profile.png in Resources */,
 				08E70DA517D304D30030383E /* home_tag.png in Resources */,
 				08C226A018C333D600060507 /* ActivityViewController.xib in Resources */,
+				0828081D18C9E9A80082484C /* NibMyBookmarkCell.xib in Resources */,
 				08E70DA617D304D30030383E /* me.png in Resources */,
 				08E70DA717D304D30030383E /* setting_tag.png in Resources */,
 				08E70DAC17D305830030383E /* ExploreViewController.xib in Resources */,
@@ -1029,6 +1041,7 @@
 				08826AB81826753100A7FE0A /* Catalogue.png in Resources */,
 				08826AC41826EA0300A7FE0A /* SelectCategoryViewController.xib in Resources */,
 				08513C4D17F1231200E98583 /* grayArrow@2x.png in Resources */,
+				0828081918C9E0500082484C /* MyBookmarksViewController.xib in Resources */,
 				08E70DDB17D391320030383E /* Default.png in Resources */,
 				08B034C218851D2200ACCD9B /* Books.png in Resources */,
 				08B034C918851D3600ACCD9B /* Others.png in Resources */,
@@ -1160,6 +1173,7 @@
 				08697BDD185EC21000D7F8C4 /* TPKeyboardAvoidingScrollView.m in Sources */,
 				08E70DF317D3B7300030383E /* PKRevealControllerContainerView.m in Sources */,
 				08E70DF417D3B7300030383E /* UIViewController+PKRevealController.m in Sources */,
+				0828081B18C9E4230082484C /* MyBookmarksViewController.m in Sources */,
 				08513C5317F16DEA00E98583 /* UpdateProfileViewController.m in Sources */,
 				08CF7DC017ED827C000E2FC7 /* ExploreDetailViewController.m in Sources */,
 				08E70E1017D473970030383E /* FollowViewCell.m in Sources */,
@@ -1315,6 +1329,7 @@
 				GCC_PREFIX_HEADER = "DealsInterestApp/DealsInterestApp-Prefix.pch";
 				INFOPLIST_FILE = "DealsInterestApp/DealsInterestApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[sdk=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1339,6 +1354,7 @@
 				GCC_PREFIX_HEADER = "DealsInterestApp/DealsInterestApp-Prefix.pch";
 				INFOPLIST_FILE = "DealsInterestApp/DealsInterestApp-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				"OTHER_LDFLAGS[sdk=*]" = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -342,6 +342,7 @@ UITextField *titleTextBox;
         [priceTextBox setHidden:TRUE];
         [conditionSwitch setHidden:TRUE];
         [contentLabel setHidden:TRUE];
+        [titleTextBox addTarget:self action:@selector(updateTitleUsingContentsOfTextField:) forControlEvents:UIControlEventEditingChanged];
 //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     // Price row
@@ -465,6 +466,13 @@ UITextField *titleTextBox;
         // Push view controller into view
         [self.navigationController pushViewController:selectItemPhotoViewController animated:YES];
     }
+}
+
+- (void)updateTitleUsingContentsOfTextField:(id)sender {
+    AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    UITextField *titleTextBox = (UITextField *)sender;
+    NSLog(@"price: %@",titleTextBox.text);
+    appDelegate.uploadTitle = titleTextBox.text;
 }
 
 - (void)updateLabelUsingContentsOfTextField:(id)sender {
@@ -785,6 +793,7 @@ UITextField *titleTextBox;
     [body appendData:[[NSString stringWithString:appDelegate.uploadTitle] dataUsingEncoding:NSUTF8StringEncoding]];  // title
     NSLog(@"title: %@",appDelegate.uploadTitle);
     
+    appDelegate.uploadPrice = [appDelegate.uploadPrice stringByReplacingOccurrencesOfString:@"," withString:@""];
     [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"Content-Disposition: form-data; name=\"price\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithString:appDelegate.uploadPrice] dataUsingEncoding:NSUTF8StringEncoding]];  // price
@@ -806,19 +815,20 @@ UITextField *titleTextBox;
     [body appendData:[[NSString stringWithString:appDelegate.uploadCategory] dataUsingEncoding:NSUTF8StringEncoding]];  // category
     NSLog(@"category: %@",appDelegate.uploadCategory);
     
-    int urlCount = 1;
+//    int urlCount = 1;
     NSLog(@"Total number of image URLs: %d",[imageUrls count]);
-    for(NSString *val in imageUrls){
+    for(int i=1;i<=[imageUrls count];i--){
+        NSString *val = [imageUrls objectAtIndex:i];
         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"photo%d\"\r\n\r\n",urlCount] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"photo%d\"\r\n\r\n",i] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[[NSString stringWithString:[NSString stringWithFormat:@"%@",val]] dataUsingEncoding:NSUTF8StringEncoding]];  // image_url
         NSLog(@"Post Image URL Upload: %@",val);
-        urlCount = urlCount + 1;
+//        urlCount = urlCount + 1;
     }
     
-    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Disposition: form-data; name=\"photo1\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithString:[NSString stringWithFormat:@"%@",inUrl]] dataUsingEncoding:NSUTF8StringEncoding]];  // image_url
+//    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:[@"Content-Disposition: form-data; name=\"photo1\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:[[NSString stringWithString:[NSString stringWithFormat:@"%@",inUrl]] dataUsingEncoding:NSUTF8StringEncoding]];  // image_url
     
     // Convert string to nsmutablestring first
     NSMutableString *ms = [NSMutableString stringWithString:appDelegate.uploadLocation];

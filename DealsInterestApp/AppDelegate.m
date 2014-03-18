@@ -69,12 +69,13 @@ bool appActive = false;
     _postItemPhotoCount = 0;
     
     // instantiate the view controllers:
-//    self.homeViewController = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
-//    UINavigationController *homeNavigationController =  [[UINavigationController alloc] initWithRootViewController:self.homeViewController];
+    self.homeViewController = [[HomeViewController alloc] initWithNibName:nil bundle:nil];
+    self.homeViewController.categoryType = @"All";
+    UINavigationController *homeNavigationController =  [[UINavigationController alloc] initWithRootViewController:self.homeViewController];
     self.exploreViewController = [[ExploreViewController alloc] initWithNibName:nil bundle:nil];
-    UINavigationController *homeNavigationController =  [[UINavigationController alloc] initWithRootViewController:self.exploreViewController];
-    self.searchViewController = [[SearchViewController alloc] initWithNibName:nil bundle:nil];
-    UINavigationController *searchNavigationController =  [[UINavigationController alloc] initWithRootViewController:self.searchViewController];
+//    UINavigationController *homeNavigationController =  [[UINavigationController alloc] initWithRootViewController:self.exploreViewController];
+//    self.searchViewController = [[SearchViewController alloc] initWithNibName:nil bundle:nil];
+    UINavigationController *searchNavigationController =  [[UINavigationController alloc] initWithRootViewController:self.exploreViewController];
     
     self.postItemViewController = [[PostItemViewController alloc] initWithNibName:nil bundle:nil];
     UINavigationController *postNavigationController =  [[UINavigationController alloc] initWithRootViewController:self.postItemViewController];
@@ -111,9 +112,9 @@ bool appActive = false;
     
     // set the titles for the view controllers:
 //    self.homeViewController.title = @"Home";
-    homeNavigationController.title = @"Catalogue";
+    homeNavigationController.title = @"Browse";
 //    self.exploreViewController.title = @"Explore";
-    searchNavigationController.title = @"Search";
+    searchNavigationController.title = @"Catalogue";
 //    self.postViewController.title = @"Post";
     postNavigationController.title = @"Snap!";
 //    self.meViewController.title = @"Me";
@@ -123,9 +124,9 @@ bool appActive = false;
     
     // set the images to appear in the tab bar:
 //    self.homeViewController.tabBarItem.image = [UIImage imageNamed:@"home_tag.png"];
-    homeNavigationController.tabBarItem.image = [UIImage imageNamed:@"Catalogue.png"];
+    homeNavigationController.tabBarItem.image = [UIImage imageNamed:@"home_tag.png"];
 //    self.exploreViewController.tabBarItem.image = [UIImage imageNamed:@"category.png"];
-    searchNavigationController.tabBarItem.image = [UIImage imageNamed:@"Search1.png"];
+    searchNavigationController.tabBarItem.image = [UIImage imageNamed:@"Catalogue.png"];
 //    self.postViewController.tabBarItem.image = [UIImage imageNamed:@"post_tag2.png"];
     postNavigationController.tabBarItem.image = [UIImage imageNamed:@"Sell.png"];
 //    self.meViewController.tabBarItem.image = [UIImage imageNamed:@"me.png"];
